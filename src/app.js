@@ -21,6 +21,9 @@ function updateWeatherConditions(response) {
   document.querySelector("#date").innerHTML = formatDate(
     response.data.dt * 1000
   );
+  document.querySelector("#time").innerHTML = formatTime(
+    response.data.dt * 1000
+  );
   document.querySelector("#precipitation-description").innerHTML =
     response.data.weather[0].description;
   document.querySelector(
@@ -57,7 +60,7 @@ searchCity(`Schaffhausen`);
 function formatDate(timestamp) {
   let date = new Date(timestamp);
 
-  let days = [
+  let weekdays = [
     "Sunday",
     "Monday",
     "Tuesday",
@@ -66,8 +69,24 @@ function formatDate(timestamp) {
     "Friday",
     "Saturday",
   ];
-  let day = days[date.getDay()];
-  return `${day} ${formatTime(timestamp)}`;
+  let weekday = weekdays[date.getDay()];
+  let months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  let month = months[date.getMonth()];
+  let dateOfMonth = date.getDate();
+  return `${weekday}, ${month} ${dateOfMonth}`;
 }
 
 function formatTime(timestamp) {
