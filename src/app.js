@@ -18,6 +18,9 @@ function updateWeatherConditions(response) {
   document.querySelector("#temp-main").innerHTML = Math.round(
     celsiusTemperature
   );
+  document.querySelector("#date").innerHTML = formatDate(
+    response.data.dt * 1000
+  );
   document.querySelector("#precipitation-description").innerHTML =
     response.data.weather[0].description;
   document.querySelector(
@@ -51,35 +54,34 @@ let searchForm = document.querySelector("#city-form");
 searchForm.addEventListener("submit", submitCityInput);
 searchCity(`Schaffhausen`);
 
-function formatDate(event) {
-  let dateComponents = {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  };
-  return event.toLocaleDateString(undefined, dateComponents);
+function formatDate(timestamp) {
+  let date = new Date(timestamp);
+
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  let day = days[date.getDay()];
+  return `${day} ${formatTime(timestamp)}`;
 }
 
-let dateLine = document.querySelector("#date");
-dateLine.innerHTML = formatDate(new Date());
-
-function currentTime(time) {
-  let now = time;
-  let hours = now.getHours();
-  let minutes = now.getMinutes();
+function formatTime(timestamp) {
+  let date = new Date(timestamp);
+  let hours = date.getHours();
+  let minutes = date.getMinutes();
   if (hours < 10) {
     hours = `0${hours}`;
   }
   if (minutes < 10) {
     minutes = `0${minutes}`;
   }
-  let timeRepresentation = `${hours}:${minutes}`;
-  return timeRepresentation;
+  return `${hours}:${minutes}`;
 }
-
-let timeLine = document.querySelector("#time");
-timeLine.innerHTML = currentTime(new Date());
 
 function displayCelsiusTemperature(event) {
   event.preventDefault();

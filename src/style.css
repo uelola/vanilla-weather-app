@@ -34,10 +34,7 @@ body {
   box-shadow: 0 0 5px #c0edea;
   border-radius: 3px;
 }
-.current:hover {
-  cursor: pointer;
-  box-shadow: 0 0 5px #fdbd45;
-}
+
 .weather-icon-main {
   width: 80px;
   display: block;
@@ -54,12 +51,20 @@ body {
 .city-and-country {
   text-transform: capitalize;
 }
-.fahrenheit {
+.degree-views {
+  margin-top: 5px;
+  margin-left: 5px;
+  display: inline-block;
+  text-align: right;
+}
+.fahrenheit,
+.celsius {
   color: #555555;
   text-decoration: none;
   cursor: default;
 }
-.degree-views .fahrenheit:hover {
+.fahrenheit:hover,
+.celsius:hover {
   text-decoration: none;
 }
 
@@ -89,12 +94,6 @@ body {
 .temp-main {
   text-align: right;
   display: inline-block;
-}
-.degree-views {
-  margin-top: 8px;
-  display: inline-block;
-  text-align: right;
-  cursor: default;
 }
 .sunrise-sunset {
   font-size: 10px;
