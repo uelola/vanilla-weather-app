@@ -4,19 +4,108 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="src/style.css" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
       crossorigin="anonymous"
     />
-    <div class="container">
-      <a href="" class="btn btn-primary">Click me</a>
-    </div>
+     <link rel="stylesheet" href="src/style.css" />
+     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>Weather App</title>
   </head>
   <body>
+    <div class="container">
+      <div class="weather-app-wrapper">
+      <div class="weather-app">
+        <form id="city-form">
+          <div class="row">
+            <div class="col-4 enter-a-city">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter a city"
+                autofocus="on"
+                id="city-input"
+              />
+            </div>
+            <div class="col-1">
+              <input type="submit" class="search" value="Search" id="search" />
+            </div>
+            <div class="col-7">
+              <h4 class="city-and-country" id="city-and-country"></h4>
+            </div>
+          </div>
+        </form>
+        <h5 class="date" id="date"></h5>
+                <h6 class="time" id="time"></h5>
+              <div class="row">
+                <div class="col-2">
+                  <img src="" class="weather-icon-main" id="icon-main" alt="weather-icon-main">
+                </div>
+                <div class="col-1" >
+                  <h1 class="temp-main" id="temp-main"></h1>
+                </div>
+                <div class="col-2">
+                  <h6 class="degree-views">
+                    <strong><a href="#" class="celsius" id=celsius>°C</strong>
+                    |<a href="#" class="fahrenheit" id=fahrenheit>°F</a>
+                  </h6>
+                </div>
+                <div class="col-4">
+                    <ul class="humidity-wind">
+                        <li> <span id=humidity></span>%</li>
+                        <li> <span id=wind></span>km/h</li>
+                      </ul>
+                </div>
+                <div class="col-3">
+                    <ul class="sunrise-sunset">
+                        <li>🌅 Sunrise 7:10 </li>
+                        <li>🌄 Sunset 18:07 </li>
+                </div>
+                <div class="col-12">
+                  <h6 class="precipitation-description" id="precipitation-description"></h6>
+                </div>
+              </div>
+                <div class="row">
+                  <div class="col-6 detailed-temp-wind">
+                    <h7 class="detailed-temp">
+                         Temperature
+                    </h7>
+                    <h7 class="detailed-wind">
+                         Wind
+                    </h7>
+                  </div>
+                  <div class="col-6">
+                    <div class="row">
+                      <div class="col-3 air-quality">
+                      <label for="customRange2" class="form-label">AIR QUALITY</label>
+                    </div>
+                    <div class="col-9 air-quality-poor"><em>Poor</em></div>
+                    </div>
+                      <input type="range" class="form-range" min="0" max="5" id="customRange2">
+                  </div>
+                </div>
+                <div class="row time-display">
+                    <div class="col">02:00</div>
+                    <div class="col">05:00</div>
+                    <div class="col">08:00</div>
+                    <div class="col">11:00</div>
+                    <div class="col">14:00</div>
+                    <div class="col">17:00</div>
+                    <div class="col">20:00</div>
+                    <div class="col">23:00</div>
+                  </div>
+                  <div class="border border-2">
+
+                </div>
+      </div> 
+      <small>
+        <a href="" target="_blank">Open-source code</a>
+        by Lola Ueda
+      </small>
+      </div>
+    </div>
     <script src="src/app.js"></script>
   </body>
 </html>
