@@ -35,7 +35,7 @@ function updateWeatherConditions(response) {
   let iconMain = document.querySelector("#icon-main");
   iconMain.setAttribute(
     "src",
-    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   iconMain.setAttribute("alt", response.data.weather[0].description);
 }
