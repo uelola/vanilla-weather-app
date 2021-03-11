@@ -68,6 +68,7 @@ body {
   opacity: 0.8;
   cursor: default;
   text-decoration: none;
+  font-weight: 700;
 }
 .degree-views .active:hover {
   text-decoration: none;
@@ -93,6 +94,7 @@ body {
   margin-top: 8px;
   display: inline-block;
   text-align: right;
+  cursor: default;
 }
 .sunrise-sunset {
   font-size: 10px;
