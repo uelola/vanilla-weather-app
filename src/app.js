@@ -11,6 +11,9 @@ function searchCity(city) {
   let apiKey = "45806222ea153dc5cbd693b6ea7eebaf";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(updateWeatherConditions);
+
+  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForacst);
 }
 function updateWeatherConditions(response) {
   document.querySelector("#city-and-country").innerHTML = response.data.name;
@@ -23,6 +26,12 @@ function updateWeatherConditions(response) {
   );
   document.querySelector("#time").innerHTML = formatTime(
     response.data.dt * 1000
+  );
+  document.querySelector("#sunrise").innerHTML = formatTime(
+    response.data.sys.sunrise * 1000
+  );
+  document.querySelector("#sunset").innerHTML = formatTime(
+    response.data.sys.sunset * 1000
   );
   document.querySelector("#precipitation-description").innerHTML =
     response.data.weather[0].description;
@@ -38,6 +47,34 @@ function updateWeatherConditions(response) {
     `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   iconMain.setAttribute("alt", response.data.weather[0].description);
+}
+
+function displayForacst(response) {
+  let threeHourforecastView = document.querySelector("#forecast");
+  threeHourforecastView.innerHTML = null;
+  let forecast = null;
+
+  for (let index = 0; index < 8; index++) {
+    forecast = response.data.list[index];
+    threeHourforecastView.innerHTML += `
+    <div class="col three-hour-forecast-col">
+      <h6>
+        ${formatTime(forecast.dt * 1000)}
+      </h6>
+      <img
+        src="http://openweathermap.org/img/wn/${
+          forecast.weather[0].icon
+        }@2x.png" class="forecast-icon" 
+      />
+      <div class="weather-forecast-temperature">
+        <strong>
+          ${Math.round(forecast.main.temp_max)}°
+        </strong>
+        ${Math.round(forecast.main.temp_min)}°
+      </div>
+    </div>
+  `;
+  }
 }
 
 function getLocation(position) {
@@ -122,6 +159,3 @@ let fahrenheitLink = document.querySelector("#fahrenheit-link");
 let celsiusLink = document.querySelector("#celsius-link");
 fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
 celsiusLink.addEventListener("click", displayCelsiusTemperature);
-
-let defaultView = document.querySelector("#current");
-defaultView.addEventListener("click", getCurrentLocation);

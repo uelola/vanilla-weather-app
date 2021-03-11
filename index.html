@@ -61,8 +61,8 @@
                 </div>
                 <div class="col-3">
                     <ul class="sunrise-sunset">
-                        <li>🌅 Sunrise 7:10 </li>
-                        <li>🌄 Sunset 18:07 </li>
+                        <li>🌅 Sunrise <small id=sunrise></small></li>
+                        <li>🌄 Sunset <small id=sunset></small></li>
                 </div>
                 <div class="col-12">
                   <h6 class="precipitation-description" id="precipitation-description"></h6>
@@ -87,72 +87,8 @@
                       <input type="range" class="form-range" min="0" max="5" id="customRange2">
                   </div>
                 </div>
-                <div class="row time-display">
-                    <div class="col">02:00</div>
-                    <div class="col">05:00</div>
-                    <div class="col">08:00</div>
-                    <div class="col">11:00</div>
-                    <div class="col">14:00</div>
-                    <div class="col">17:00</div>
-                    <div class="col">20:00</div>
-                    <div class="col">23:00</div>
-                  </div>
-                 <div class="row weather-forecast">
-                   <div class="col-2 forecast-for-weekday">
-                     <h6>
-                       Sun
-                     </h6>
-                     <img src="https://openweathermap.org/img/wn/02d@2x.png" class="forecast-icon" alt="">
-                     <div class="weather-forecast-temp">
-                       <strong>22°</strong> 17°
-                     </div>
-                   </div>
-                   <div class="col-2 forecast-for-weekday">
-                     <h6>
-                       Mon
-                     </h6>
-                     <img src="https://openweathermap.org/img/wn/02d@2x.png"class="forecast-icon" alt="">
-                     <div class="weather-forecast-temp">
-                       <strong>22°</strong> 17°
-                     </div>
-                   </div>
-                   <div class="col-2 forecast-for-weekday">
-                     <h6>
-                       Sun
-                     </h6>
-                     <img src="https://openweathermap.org/img/wn/02d@2x.png" class="forecast-icon" alt="">
-                     <div class="weather-forecast-temp">
-                       <strong>22°</strong> 17°
-                     </div>
-                   </div>
-                   <div class="col-2 forecast-for-weekday">
-                     <h6>
-                       Sun
-                     </h6>
-                     <img src="http://openweathermap.org/img/wn/02d@2x.png" class="forecast-icon" alt="">
-                     <div class="weather-forecast-temp">
-                       <strong>22°</strong> 17°
-                     </div>
-                   </div>
-                   <div class="col-2 forecast-for-weekday">
-                     <h6>
-                       Sun
-                     </h6>
-                     <img src="https://openweathermap.org/img/wn/02d@2x.png"class="forecast-icon" alt="">
-                     <div class="weather-forecast-temp">
-                       <strong>22°</strong> 17°
-                     </div>
-                   </div>
-                   <div class="col-2 forecast-for-weekday">
-                     <h6>
-                       Sun
-                     </h6>
-                     <img src="https://openweathermap.org/img/wn/02d@2x.png" class="forecast-icon" alt="">
-                     <div class="weather-forecast-temp">
-                       <strong>22°</strong> 17°
-                     </div>
-                   </div>
-
+                <div class="border border-2">
+                 <div class="row weather-forecast" id="forecast"></div>
                  </div>
       </div> 
       <small>
