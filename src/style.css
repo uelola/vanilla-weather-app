@@ -57,11 +57,20 @@ body {
 .fahrenheit {
   color: #555555;
   text-decoration: none;
+  cursor: default;
 }
-.celsius {
+.degree-views .fahrenheit:hover {
   text-decoration: none;
+}
+
+.degree-views .active {
   color: black;
   opacity: 0.8;
+  cursor: default;
+  text-decoration: none;
+}
+.degree-views .active:hover {
+  text-decoration: none;
 }
 .time-display {
   opacity: 0.7;
