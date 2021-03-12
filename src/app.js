@@ -62,7 +62,7 @@ function displayForecast(response) {
         ${formatTime(forecast.dt * 1000)}
       </h6>
       <img
-        src="http://openweathermap.org/img/wn/${
+        src="https://openweathermap.org/img/wn/${
           forecast.weather[0].icon
         }@2x.png" class="forecast-icon" 
       />
@@ -153,7 +153,25 @@ function displayFahrenheitTemperature(event) {
   celsiusLink.classList.remove("active");
   fahrenheitLink.classList.add("active");
   temp.innerHTML = Math.round((celsiusTemperature * 9) / 5 + 32);
-  forecastTemp.innerHTML = Math.round((forecast.main.temp_max * 9) / 5 + 32);
+  let apiKey = "45806222ea153dc5cbd693b6ea7eebaf";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayFahrenheitForecast);
+
+  function displayFahrenheitForecast(response){
+  let forecastTemp = document.querySelector("#weather-forecast-temperature");
+  console.log(forecastTemp);
+  console.log(response.data);
+  forecastTemp.innerHTML = null;
+  let forecast = null;
+  for (let index = 0; index < 8; index++) {
+    forecast = response.data.list[index];
+    forecastTemp.innerHTML =+ `
+        <strong>
+          ${Math.round((forecast.main.temp_max * 9) / 5 + 32)}°
+        </strong>
+        ${Math.round((forecast.main.temp_min * 9) / 5 + 32)}°
+    `;
+   }
 }
 let forecastTemp = document.querySelector("#weather-forecast-temperature");
 
