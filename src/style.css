@@ -179,6 +179,14 @@ body {
   height: 46px;
   width: 46px;
 }
+.wind-detailed {
+  position: relative;
+  margin: 10px 10px 5px -5px;
+  text-align: right;
+  white-space: nowrap;
+  font-size: 12px;
+  color: #191970;
+}
 .col-3 .form-label {
   position: relative;
   font-size: 13px;
@@ -202,14 +210,12 @@ body {
   font-size: 12px;
 }
 .three-hour-forecast-col {
-  position: relative;
   transition: all 400ms ease-in-out;
   border: none;
   border-radius: 10px;
   padding: 5px -5px;
 }
 .three-hour-forecast-col:hover {
-  position: relative;
   background-image: linear-gradient(to top, #accbee 0%, #e7f0fd 100%);
   border-radius: 10px;
   padding: 5px -5px;

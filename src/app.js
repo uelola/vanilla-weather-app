@@ -60,7 +60,7 @@ function displayForecast(response) {
   for (let index = 0; index < 8; index++) {
     forecast = response.data.list[index];
     threeHourforecastView.innerHTML += `
-    <div class="col "three-hour-forecast-col">
+    <div class="col three-hour-forecast-col">
       <h6>
         ${formatTime(forecast.dt * 1000)}
       </h6>
@@ -76,6 +76,29 @@ function displayForecast(response) {
         ${Math.round(forecast.main.temp_min)}°
       </div>
     </div>
+  `;
+  }
+}
+function clickWindDetails() {
+  let city = document.querySelector("#city-and-country").innerHTML;
+  let apiKey = "45806222ea153dc5cbd693b6ea7eebaf";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayWindDetails);
+}
+function displayWindDetails(response) {
+  console.log(response.data);
+  let windDetailedView = document.querySelector("#wind-detailed");
+  windDetailedView.innerHTML = null;
+  let forecast = null;
+
+  for (let index = 0; index < 8; index++) {
+    forecast = response.data.list[index];
+    windDetailedView.innerHTML += `
+      <div class="col three-hour-forecast-wind">
+        <em>
+          ${Math.round(forecast.wind.speed)}km/h
+        </em>
+      </div>
   `;
   }
 }
@@ -180,7 +203,6 @@ function changeForecastTempToCelsius(response) {
   `;
   }
 }
-
 function displayFahrenheitTemperature(event) {
   event.preventDefault();
   let temp = document.querySelector("#temp-main");
@@ -224,3 +246,5 @@ let fahrenheitLink = document.querySelector("#fahrenheit-link");
 let celsiusLink = document.querySelector("#celsius-link");
 fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
 celsiusLink.addEventListener("click", displayCelsiusTemperature);
+let windDetails = document.querySelector("#detailed-wind");
+windDetails.addEventListener("click", clickWindDetails);
