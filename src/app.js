@@ -1,6 +1,9 @@
 function submitCityInput(event) {
   event.preventDefault();
   let cityInput = document.querySelector("#city-input").value;
+  cityInput = cityInput.toLowerCase().trim();
+  //removing spaces and unwanted char from the string except letters
+  cityInput = cityInput.replaceAll(/[^A-Za-z]+/g, "");
   let h4 = document.querySelector("h4");
   if (cityInput) {
     h4.innerHTML = `${cityInput}`;
@@ -57,7 +60,7 @@ function displayForecast(response) {
   for (let index = 0; index < 8; index++) {
     forecast = response.data.list[index];
     threeHourforecastView.innerHTML += `
-    <div class="col three-hour-forecast-col">
+    <div class="col "three-hour-forecast-col">
       <h6>
         ${formatTime(forecast.dt * 1000)}
       </h6>
@@ -145,6 +148,37 @@ function displayCelsiusTemperature(event) {
   celsiusLink.classList.add("active");
   fahrenheitLink.classList.remove("active");
   temp.innerHTML = Math.round(celsiusTemperature);
+  let city = document.querySelector("#city-and-country").innerHTML;
+  let apiKey = "45806222ea153dc5cbd693b6ea7eebaf";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(changeForecastTempToCelsius);
+}
+function changeForecastTempToCelsius(response) {
+  let threeHourforecastView = document.querySelector("#forecast");
+  threeHourforecastView.innerHTML = null;
+  let forecast = null;
+
+  for (let index = 0; index < 8; index++) {
+    forecast = response.data.list[index];
+    threeHourforecastView.innerHTML += `
+    <div class="col "three-hour-forecast-col">
+      <h6>
+        ${formatTime(forecast.dt * 1000)}
+      </h6>
+      <img
+        src="https://openweathermap.org/img/wn/${
+          forecast.weather[0].icon
+        }@2x.png" class="forecast-icon" 
+      />
+      <div class="weather-forecast-temperature">
+        <strong>
+          ${Math.round(forecast.main.temp_max)}°
+        </strong>
+        ${Math.round(forecast.main.temp_min)}°
+      </div>
+    </div>
+  `;
+  }
 }
 
 function displayFahrenheitTemperature(event) {
@@ -153,29 +187,38 @@ function displayFahrenheitTemperature(event) {
   celsiusLink.classList.remove("active");
   fahrenheitLink.classList.add("active");
   temp.innerHTML = Math.round((celsiusTemperature * 9) / 5 + 32);
+  let city = document.querySelector("#city-and-country").innerHTML;
   let apiKey = "45806222ea153dc5cbd693b6ea7eebaf";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(displayFahrenheitForecast);
+  let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(changeForecastTempToFahrenheit);
+}
+function changeForecastTempToFahrenheit(response) {
+  let threeHourforecastView = document.querySelector("#forecast");
+  threeHourforecastView.innerHTML = null;
+  let forecast = null;
 
-  function displayFahrenheitForecast(response) {
-    let forecastTemp = document.querySelector("#weather-forecast-temperature");
-    console.log(forecastTemp);
-    console.log(response.data);
-    forecastTemp.innerHTML = null;
-    let forecast = null;
-    for (let index = 0; index < 8; index++) {
-      forecast = response.data.list[index];
-      forecastTemp.innerHTML = +`
+  for (let index = 0; index < 8; index++) {
+    forecast = response.data.list[index];
+    threeHourforecastView.innerHTML += `
+    <div class="col three-hour-forecast-col">
+      <h6>
+        ${formatTime(forecast.dt * 1000)}
+      </h6>
+      <img
+        src="https://openweathermap.org/img/wn/${
+          forecast.weather[0].icon
+        }@2x.png" class="forecast-icon" 
+      />
+      <div class="weather-forecast-temperature">
         <strong>
           ${Math.round((forecast.main.temp_max * 9) / 5 + 32)}°
         </strong>
-        ${Math.round((forecast.main.temp_min * 9) / 5 + 32)}°
-    `;
-    }
+          ${Math.round((forecast.main.temp_min * 9) / 5 + 32)}°
+      </div>
+    </div>
+  `;
   }
 }
-
-// let forecastTemp = document.querySelector("#weather-forecast-temperature");
 
 let fahrenheitLink = document.querySelector("#fahrenheit-link");
 let celsiusLink = document.querySelector("#celsius-link");
