@@ -4,9 +4,11 @@ body {
     Segoe UI Symbol;
   font-weight: 400;
   color: #4a4a4a;
+  margin: 60px auto;
 }
+
 .weather-app-wrapper {
-  max-width: 650px;
+  max-width: 6450px;
   margin: 30 auto;
 }
 .weather-app {
@@ -28,6 +30,7 @@ body {
   background-position: 70% 30%;
   background-attachment: fixed;
   background-size: cover;
+  border-radius: 10px;
   opacity: 0.7;
 }
 .form-control {
