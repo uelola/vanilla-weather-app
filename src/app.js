@@ -157,23 +157,25 @@ function displayFahrenheitTemperature(event) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayFahrenheitForecast);
 
-  function displayFahrenheitForecast(response){
-  let forecastTemp = document.querySelector("#weather-forecast-temperature");
-  console.log(forecastTemp);
-  console.log(response.data);
-  forecastTemp.innerHTML = null;
-  let forecast = null;
-  for (let index = 0; index < 8; index++) {
-    forecast = response.data.list[index];
-    forecastTemp.innerHTML =+ `
+  function displayFahrenheitForecast(response) {
+    let forecastTemp = document.querySelector("#weather-forecast-temperature");
+    console.log(forecastTemp);
+    console.log(response.data);
+    forecastTemp.innerHTML = null;
+    let forecast = null;
+    for (let index = 0; index < 8; index++) {
+      forecast = response.data.list[index];
+      forecastTemp.innerHTML = +`
         <strong>
           ${Math.round((forecast.main.temp_max * 9) / 5 + 32)}°
         </strong>
         ${Math.round((forecast.main.temp_min * 9) / 5 + 32)}°
     `;
-   }
+    }
+  }
 }
-let forecastTemp = document.querySelector("#weather-forecast-temperature");
+
+// let forecastTemp = document.querySelector("#weather-forecast-temperature");
 
 let fahrenheitLink = document.querySelector("#fahrenheit-link");
 let celsiusLink = document.querySelector("#celsius-link");
