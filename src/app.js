@@ -21,6 +21,7 @@ function searchCity(city) {
   apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayWindDetails.collapse);
 }
+let windFlag = false;
 
 function updateWeatherConditions(response) {
   document.querySelector("#city-and-country").innerHTML = response.data.name;
@@ -86,17 +87,20 @@ function displayForecast(response) {
 function clickWindDetails(event) {
   event.preventDefault();
   let city = document.querySelector("#city-and-country").innerHTML;
-  console.log(city);
   let apiKey = "45806222ea153dc5cbd693b6ea7eebaf";
   let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(displayWindDetails);
+  if (windFlag === false) {
+    axios.get(apiUrl).then(displayWindDetails);
+    windFlag = true;
+  } else {
+    document.querySelector("#wind-forecast").innerHTML = null;
+    windFlag = false;
+  }
 }
 function displayWindDetails(response) {
-  console.log(response.data);
   let threeHourWindView = document.querySelector("#wind-forecast");
   threeHourWindView.innerHTML = null;
   let forecast = null;
-
   for (let index = 0; index < 8; index++) {
     forecast = response.data.list[index];
     threeHourWindView.innerHTML += `
@@ -189,7 +193,7 @@ function changeForecastTempToCelsius(response) {
   for (let index = 0; index < 8; index++) {
     forecast = response.data.list[index];
     threeHourforecastView.innerHTML += `
-    <div class="col "three-hour-forecast-col">
+    <div class="col three-hour-forecast-col">
       <h6>
         ${formatTime(forecast.dt * 1000)}
       </h6>
