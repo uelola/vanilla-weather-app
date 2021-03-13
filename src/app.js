@@ -92,7 +92,7 @@ function getSearchCoordinates(response) {
   let longitude = response.data.coord.lon;
   let latitude = response.data.coord.lat;
   let apiKey = "45806222ea153dc5cbd693b6ea7eebaf";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${longitude}&lon=${latitude}&exclude=current,hourly,minutely,hourly,alerts&appid=${apiKey}&units=metric`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=current,hourly,minutely,hourly,alerts&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displaySevenDayForecast);
 }
 function displaySevenDayForecast(response) {

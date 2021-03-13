@@ -191,6 +191,9 @@ body {
   position: relative;
   font-size: 13px;
 }
+.weather-forecast {
+  margin: 10px 10px 10px;
+}
 .weather-forecast,
 .seven-days-forecast {
   position: relative;
@@ -202,6 +205,7 @@ body {
   position: relative;
   font-size: 12px;
   margin-top: 10px;
+  margin-bottom: 0;
   text-align: center;
 }
 .weather-forecast-temperature,
