@@ -17,7 +17,11 @@ function searchCity(city) {
 
   apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayForecast);
+
+  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayWindDetails.collapse);
 }
+
 function updateWeatherConditions(response) {
   document.querySelector("#city-and-country").innerHTML = response.data.name;
   celsiusTemperature = response.data.main.temp;
@@ -79,21 +83,23 @@ function displayForecast(response) {
   `;
   }
 }
-function clickWindDetails() {
+function clickWindDetails(event) {
+  event.preventDefault();
   let city = document.querySelector("#city-and-country").innerHTML;
+  console.log(city);
   let apiKey = "45806222ea153dc5cbd693b6ea7eebaf";
   let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayWindDetails);
 }
 function displayWindDetails(response) {
   console.log(response.data);
-  let windDetailedView = document.querySelector("#wind-detailed");
-  windDetailedView.innerHTML = null;
+  let threeHourWindView = document.querySelector("#wind-forecast");
+  threeHourWindView.innerHTML = null;
   let forecast = null;
 
   for (let index = 0; index < 8; index++) {
     forecast = response.data.list[index];
-    windDetailedView.innerHTML += `
+    threeHourWindView.innerHTML += `
       <div class="col three-hour-forecast-wind">
         <em>
           ${Math.round(forecast.wind.speed)}km/h
@@ -102,7 +108,6 @@ function displayWindDetails(response) {
   `;
   }
 }
-
 function getLocation(position) {
   let apiKey = `45806222ea153dc5cbd693b6ea7eebaf`;
   let units = `metric`;
@@ -246,5 +251,5 @@ let fahrenheitLink = document.querySelector("#fahrenheit-link");
 let celsiusLink = document.querySelector("#celsius-link");
 fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
 celsiusLink.addEventListener("click", displayCelsiusTemperature);
-let windDetails = document.querySelector("#detailed-wind");
-windDetails.addEventListener("click", clickWindDetails);
+let windLink = document.querySelector("#detailed-wind");
+windLink.addEventListener("click", clickWindDetails);
