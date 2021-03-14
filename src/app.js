@@ -20,7 +20,8 @@ function searchCity(city) {
 
   apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(getSearchedCoordinates);
-  axios.get(apiUrl).then(displayWindDetails.collapse);
+  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`;
+  axios.get(apiUrl).then(displayWindDetails);
 }
 
 function updateWeatherConditions(response) {
@@ -131,6 +132,7 @@ function expandWindDetails(event) {
   }
 }
 function displayWindDetails(response) {
+  windFlag = true;
   let threeHourWindView = document.querySelector("#wind-forecast");
   threeHourWindView.innerHTML = null;
   let forecast = null;
