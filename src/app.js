@@ -3,7 +3,7 @@ function submitCityInput(event) {
   let cityInput = document.querySelector("#city-input").value;
   cityInput = cityInput.toLowerCase().trim();
   //removing spaces and unwanted char from the string except letters
-  cityInput = cityInput.replaceAll(/[^A-Za-z]+/g, "");
+  cityInput = cityInput.replaceAll("/[^ w]+/", "");
   let h4 = document.querySelector("h4");
   if (cityInput) {
     h4.innerHTML = `${cityInput}`;
@@ -20,6 +20,7 @@ function searchCity(city) {
 
   apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(getSearchedCoordinates);
+  axios.get(apiUrl).then(displayWindDetails.collapse);
 }
 
 function updateWeatherConditions(response) {
