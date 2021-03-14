@@ -8,7 +8,7 @@ body {
 }
 
 .weather-app-wrapper {
-  max-width: 6450px;
+  max-width: 650px;
   margin: 30 auto;
 }
 .weather-app {
@@ -153,7 +153,6 @@ body {
   display: inline-block;
   transition: all 200ms ease-in-out;
 }
-.detailed-temp:hover,
 .detailed-wind:hover {
   position: relative;
   text-decoration: solid underline #fcc155 2px;
@@ -179,13 +178,17 @@ body {
   height: 46px;
   width: 46px;
 }
+.weather-forecast .forecast-icon {
+  height: 38px;
+  width: 38px;
+}
 .wind-forecast {
   position: relative;
-  margin: 10px 10px 5px -5px;
+  margin: 10px 10px 0 0;
   text-align: right;
   white-space: nowrap;
   font-size: 12px;
-  color: #191970;
+  color: #1b1b1b;
 }
 .col-3 .form-label {
   position: relative;
@@ -202,19 +205,20 @@ body {
 }
 .weather-forecast h6,
 .seven-days-forecast h6 {
-  position: relative;
-  font-size: 12px;
+  font-size: 10px;
   margin-top: 10px;
   margin-bottom: 0;
   text-align: center;
 }
 .weather-forecast-temperature,
 .dayly-forecast-temperature {
-  position: relative;
   margin-bottom: 5px;
   text-align: center;
   white-space: nowrap;
   font-size: 12px;
+}
+.weather-forecast-temperature {
+  font-size: 10px;
 }
 .three-hour-forecast-col,
 .dayly-forecast {
@@ -233,7 +237,6 @@ body {
 .border-2 {
   position: relative;
   border-radius: 5px;
-  border-color: #aaa9ad;
   margin: 20px 10px 5px;
   padding: 7px;
 }
