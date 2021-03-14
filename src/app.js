@@ -21,10 +21,8 @@ function searchCity(city) {
   apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(getSearchedCoordinates);
 }
-let windFlag = false;
 
 function updateWeatherConditions(response) {
-  console.log(response.data);
   document.querySelector("#city-and-country").innerHTML = response.data.name;
   celsiusTemperature = response.data.main.temp;
   document.querySelector("#temp-main").innerHTML = Math.round(
@@ -118,7 +116,7 @@ function displaySevenDayForecast(response) {
   `;
   }
 }
-function clickWindDetails(event) {
+function expandWindDetails(event) {
   event.preventDefault();
   let city = document.querySelector("#city-and-country").innerHTML;
   let apiKey = "45806222ea153dc5cbd693b6ea7eebaf";
@@ -146,19 +144,7 @@ function displayWindDetails(response) {
   `;
   }
 }
-
-function getLocation(position) {
-  let apiKey = `45806222ea153dc5cbd693b6ea7eebaf`;
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric&appid=${apiKey}&units=metric`;
-
-  axios.get(apiUrl).then(updateWeatherConditions);
-}
-function getCurrentLocation(event) {
-  event.preventDefault();
-  navigator.geolocation.getCurrentPosition(getLocation);
-}
 let celsiusTemperature = null;
-
 let searchForm = document.querySelector("#city-form");
 searchForm.addEventListener("submit", submitCityInput);
 searchCity(`Schaffhausen`);
@@ -207,7 +193,6 @@ function formatTime(timestamp) {
   }
   return `${hours}:${minutes}`;
 }
-
 function displayCelsiusTemperature(event) {
   event.preventDefault();
   let temp = document.querySelector("#temp-main");
@@ -272,9 +257,10 @@ function displayForecastTempToFahrenheit(response) {
   `;
   }
 }
+let windFlag = false;
 let fahrenheitLink = document.querySelector("#fahrenheit-link");
 let celsiusLink = document.querySelector("#celsius-link");
 fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
 celsiusLink.addEventListener("click", displayCelsiusTemperature);
 let windLink = document.querySelector("#detailed-wind");
-windLink.addEventListener("click", clickWindDetails);
+windLink.addEventListener("click", expandWindDetails);

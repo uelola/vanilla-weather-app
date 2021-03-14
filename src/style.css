@@ -146,30 +146,16 @@ body {
   opacity: 0.9;
   word-spacing: 1em;
 }
-.detailed-temp,
 .detailed-wind {
+  word-spacing: 2px;
   position: relative;
-  margin: 13px 20px 0;
+  margin: 13px 30px 0;
   display: inline-block;
   transition: all 200ms ease-in-out;
 }
 .detailed-wind:hover {
   position: relative;
   text-decoration: solid underline #fcc155 2px;
-}
-.form-range {
-  position: relative;
-}
-
-.air-quality {
-  position: relative;
-  opacity: 0.9;
-}
-.air-quality-poor {
-  position: relative;
-  text-align: right;
-  opacity: 0.9;
-  font-size: 15px;
 }
 .forecast-icon {
   position: relative;
