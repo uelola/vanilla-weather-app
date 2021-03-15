@@ -25,6 +25,7 @@ function searchCity(city) {
 }
 
 function updateWeatherConditions(response) {
+  console.log(response.data);
   document.querySelector("#city-and-country").innerHTML = response.data.name;
   celsiusTemperature = response.data.main.temp;
   document.querySelector("#temp-main").innerHTML = Math.round(
@@ -33,15 +34,7 @@ function updateWeatherConditions(response) {
   document.querySelector("#date").innerHTML = formatDate(
     response.data.dt * 1000
   );
-  document.querySelector("#time").innerHTML = formatTime(
-    response.data.dt * 1000
-  );
-  document.querySelector("#sunrise").innerHTML = formatTime(
-    response.data.sys.sunrise * 1000
-  );
-  document.querySelector("#sunset").innerHTML = formatTime(
-    response.data.sys.sunset * 1000
-  );
+  document.querySelector("#time").innerHTML = formatLocalTime();
   document.querySelector("#precipitation-description").innerHTML =
     response.data.weather[0].description;
   document.querySelector(
@@ -93,6 +86,13 @@ function getSearchedCoordinates(response) {
   axios.get(apiUrl).then(displaySevenDayForecast);
 }
 function displaySevenDayForecast(response) {
+  document.querySelector("#sunrise").innerHTML = formatTimeSunriseSunset(
+    response.data.daily[0].sunrise * 1000,
+    response.data.timezone
+  );
+  document.querySelector("#sunset").innerHTML = formatTimeSunriseSunset(
+    response.data.daily[0].sunset * 1000
+  );
   let sevenDaysForecast = document.querySelector("#seven-days-forecast");
   sevenDaysForecast.innerHTML = null;
   let forecast = null;
@@ -195,6 +195,29 @@ function formatTime(timestamp) {
     minutes = `0${minutes}`;
   }
   return `${hours}:${minutes}`;
+}
+function formatLocalTime() {
+  let now = new Date();
+  let hours = now.getHours();
+  let minutes = now.getMinutes();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+  return `${hours}:${minutes}`;
+}
+
+function formatTimeSunriseSunset(timestamp, timezone) {
+  let options = {
+      timeZone: timezone,
+      hour: "numeric",
+      minute: "numeric",
+    },
+    formatter = new Intl.DateTimeFormat([], options);
+
+  return formatter.format(new Date(timestamp));
 }
 function displayCelsiusTemperature(event) {
   event.preventDefault();
